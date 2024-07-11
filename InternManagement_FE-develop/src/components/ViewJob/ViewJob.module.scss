@@ -1,0 +1,18 @@
+.detail-job-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: var(--box-radius);
+}
+
+.skill-item {
+    padding: 8px 25px;
+    margin-right: 20px;
+    background-color: var(--primary-light-color);
+    border-radius: var(--box-radius);
+    color: var(--primary-active-color);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: default;
+    user-select: none;
+}

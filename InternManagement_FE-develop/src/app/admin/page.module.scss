@@ -1,0 +1,119 @@
+.intern-container {
+    margin-top: 20px;
+    height: 85vh;
+    background-color: var(--white-color);
+    box-shadow: var(--primary-box-shadow);
+    border-radius: var(--box-radius);
+}
+
+.intern-main {
+    padding: 0px 15px;
+    width: 100%;
+    height: 100%;
+}
+
+.categories {
+    margin-top: 20px;
+    padding: 0;
+}
+
+.category-item {
+    padding: 20px 15px;
+    border-radius: var(--box-radius);
+    box-shadow: var(--primary-box-shadow);
+    background-color: var(--white-color);
+}
+
+.categogy-item__img {
+    margin-bottom: 25px;
+    width: 100%;
+    height: 150px;
+
+    & img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
+.category-item__title {
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--gray-8-color);
+
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.category-item__desc {
+    display: block;
+    margin-top: 0;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--gray-7-color);
+}
+
+.category-item__quantity {
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--blue-8-color);
+}
+
+.btn-view {
+    display: block;
+    width: fit-content;
+    margin-top: 10px;
+    padding: 6px 20px;
+    outline: none;
+    border: 2px solid transparent;
+    border-radius: var(--box-radius);
+    background-color: var(--black-color);
+    color: var(--white-color);
+    font-size: 13px;
+    text-decoration: none;
+    transition: all linear .1s;
+    cursor: pointer;
+
+    &:hover {
+        border-color: var(--black-color);
+        background-color: var(--white-color);
+        color: var(--black-color);
+    }
+}
+
+.semester-list {
+    max-height: 120px;
+}
+
+.academic-list {
+    max-height: 200px;
+}
+
+.semester-list,
+.academic-list {
+    margin-right: -15px;
+    padding-right: 10px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: #FFF;
+    }
+    
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 50px;
+        background-color: #F5F5F5;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: linear-gradient(142deg, #00D2FF 3.45%, #3A7BD5 92.1%);
+    };
+}
