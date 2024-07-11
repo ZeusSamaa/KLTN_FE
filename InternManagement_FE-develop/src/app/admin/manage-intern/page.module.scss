@@ -1,0 +1,209 @@
+.intern-container {
+    margin-top: 20px;
+    height: 85vh;
+    background-color: var(--white-color);
+    box-shadow: var(--primary-box-shadow);
+    border-radius: var(--box-radius);
+
+    &.fit-content {
+        height: fit-content;
+    }
+}
+
+.intern-main {
+    padding: 15px;
+    width: 100%;
+    height: 100%;
+}
+
+.category-heading {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--border-color);
+}
+
+.intern-manage {
+    width: 100%;
+    height: 85%;
+    padding: 20px;
+    padding-right: 12px;
+    overflow-y: scroll;
+    position: relative;
+
+    &::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: #FFF;
+    }
+    
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 50px;
+        background-color: #F5F5F5;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: linear-gradient(142deg, #00D2FF 3.45%, #3A7BD5 92.1%);
+    }
+    
+}
+
+.select-label {
+    display: block;
+    margin-bottom: 2px;
+    margin-right: 4px;
+    font-size: 14px;
+    color: var(--gray-color);
+}
+
+.remove-appearance::-webkit-outer-spin-button,
+.remove-appearance::-webkit-inner-spin-button {
+    --webkit-appearance: none;
+}
+
+.i-block {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--purple-1-color);
+    color: var(--purple-5-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-content {
+    font-size: 15px;
+    color: var(--gray-7-color);
+}
+
+.list-item {
+    margin: 0 10px;
+    padding: 5px 0;
+    background-color: var(--white-color);
+    border-radius: var(--box-radius);
+    font-size: 14px;
+    position: relative;
+}
+
+.sub-content {
+    display: block;
+    font-size: 15px;
+    color: var(--gray-6-color);
+    line-height: 20px;
+    
+    &.semibold {
+        color: var(--gray-8-color);
+        font-weight: 600;
+    }
+
+    &.order {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: var(--blue-1-color);
+        color: var(--blue-5-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    &.success-status,
+    &.fail-status,
+    &.pending-status {
+        width: fit-content;
+        padding: var(--padding-btn);
+        border-radius: var(--box-radius);
+        font-weight: 600;
+        font-size: 14px;
+    }
+    
+    &.success-status {
+        background-color: var(--green-1-color);
+        color: var(--green-5-color);
+    }
+    
+    &.fail-status {
+        background-color: var(--red-1-color);
+        color: var(--red-5-color);
+    }
+
+    &.pending-status {
+        background-color: var(--blue-1-color);
+        color: var(--blue-5-color);
+    }
+}
+
+.options {
+    text-align: right;
+    cursor: pointer;
+}
+
+.upload-container {
+    height: 180px;
+    margin: 0 auto;
+    border-radius: var(--box-radius);
+    border: 3px dashed var(--primary-active-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    & .i-upload {
+        font-size: 36px;
+        color: var(--primary-active-color);
+    }
+    
+    & .upload-title {
+        display: block;
+        margin-top: 4px;
+        font-size: 14px;
+        color: var(--gray-color);
+    }
+
+    & input[type="file"] {
+        display: none;
+    }
+
+    & .upload-label {
+        margin-top: 10px;
+        padding: var(--padding-btn);
+        border: 2px solid var(--primary-active-color);
+        border-radius: var(--box-radius);
+        color: var(--primary-active-color);
+        font-weight: bold;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all linear .2s;
+
+        &:hover {
+            padding-right: 30px;
+            padding-left: 30px;
+        }
+    }
+}
+
+.upload-link__label {
+    margin-bottom: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--blue-8-color);
+}
+
+.upload-link {
+    flex: 1;
+    margin-bottom: 40px;
+    padding: 4px 10px;
+    background-color: var(--white-color);
+    outline: none;
+    border: 1px solid var(--light-color);
+    border-radius: var(--box-radius);
+}
+
+
+@media only screen and (max-width: 1024px) {
+    .main-view {
+        width: 100% !important;
+    }
+}
+

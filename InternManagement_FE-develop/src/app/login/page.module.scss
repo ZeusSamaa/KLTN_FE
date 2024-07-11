@@ -1,0 +1,95 @@
+.login_container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("https://cdn.pixabay.com/photo/2016/06/02/02/33/triangles-1430105_1280.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login {
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+}
+
+.form {
+    flex: 1;
+    padding: 30px 30px 60px;
+    border-radius: calc(var(--box-radius) * 2);
+    background-color: var(--white-color);
+
+    & .banner_heading  {
+        font-size: 24px;
+        margin-bottom: 4px;
+    }
+}
+
+.login_require {
+    font-size: 13px;
+    margin-bottom: 30px;
+}
+
+.require_star {
+    color: var(--cancel-color);
+}
+
+.input_field {
+    margin-top: 4px;
+    width: 100%;
+    outline: none;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 13px;
+        
+    &.error {
+        border-color: var(--cancel-color);
+    }
+}
+
+.forget_pass {
+    margin-top: 2px;
+    margin-bottom: 36px;
+    font-size: 14px;
+    color: var(--blue-5-color);
+    text-align: center;
+    cursor: pointer;
+    transition: all linear .1s;
+
+    &:hover {
+        opacity: .7;
+    }
+}
+
+.message-label {
+    margin-top: 2px;
+    margin-bottom: 0;
+    font-size: 12px;
+    color: transparent;
+    
+    &.error {
+        color: var(--cancel-color);
+    }
+}
+
+.login-btn {
+    width: 100% !important;
+    padding: 10px 0;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all linear .1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        opacity: .9;
+    }
+}

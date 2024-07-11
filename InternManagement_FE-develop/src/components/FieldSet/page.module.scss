@@ -1,0 +1,47 @@
+.content {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding: 40px 20px 20px;
+    background-color: var(--white-color);
+    border: 1px solid var(--light-color);
+    border-radius: var(--box-radius);
+    position: relative;
+
+    & .heading {
+        position: absolute;
+        top: -20px;
+        left: 20px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #343a40;
+        background-color: #f7f7f7;
+        border: 1px solid var(--light-color);
+        border-radius: var(--box-radius);
+        padding: 12px 16px;
+        width: fit-content;
+    }
+   
+    & .wrapper {
+        margin-right: -20px;
+        margin-bottom: -10px;
+        max-height: 200px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+
+        &::-webkit-scrollbar-track {
+            border-radius: 10px;
+            background-color: #FFF;
+        }
+        
+        &::-webkit-scrollbar {
+            width: 8px;
+            height: 50px;
+            background-color: #F5F5F5;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background: linear-gradient(142deg, #00D2FF 3.45%, #3A7BD5 92.1%);
+        }
+    }
+}

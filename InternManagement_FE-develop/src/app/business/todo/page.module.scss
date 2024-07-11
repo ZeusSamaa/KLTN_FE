@@ -1,0 +1,133 @@
+.contact-container {
+    margin-top: 20px;
+    height: 85vh;
+    background-color: var(--white-color);
+    box-shadow: var(--primary-box-shadow);
+    border-radius: var(--box-radius);
+}
+
+.category-heading {
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--border-color);
+}
+
+.intern-main {
+    height: 72vh;
+    padding: 0 15px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    
+    &::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: #FFF;
+    }
+    
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 50px;
+        background-color: #F5F5F5;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: linear-gradient(142deg, #00D2FF 3.45%, #3A7BD5 92.1%);
+    };
+}
+
+.todo-item {
+    display: flex;
+    padding: 15px 0;
+    margin: 20px 0;
+    background-color: var(--white-color);
+    border-radius: var(--box-radius);
+    align-items: center;
+
+    &.expired {
+        box-shadow: 1px 2px 5px 0px #ffccc7;
+    }
+
+    &.active {
+        box-shadow: 1px 2px 5px 0px #b5f5ec;
+    }
+
+    &.completed {
+        box-shadow: 1px 2px 5px 0px #b7eb8f;
+    }
+
+    & .status {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+
+        &.expired {
+            background-color: #fff1f0;
+            color: #ff4d4f;
+        }
+
+        &.active {
+            background-color: #e6f4ff;
+            color: #1677ff;
+        }
+
+        &.completed {
+            background-color: #e9ffd6;
+            color: #52c41a;
+        }
+    }
+}
+
+.todo-label {
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--border-color);
+}
+
+.todo-content {
+    margin-top: 4px;
+    margin-bottom: 0;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.follow-btn {
+    width: 32px;
+    height: 32px;
+    outline: none;
+    border: none;
+    border-radius: 50%;
+    background-color: #f9f0ff;
+    color: #531dab;
+    font-size: 14px;
+    transition: all linear .1s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #f3e1ff;
+    }
+
+    &.complete-btn {
+        margin-left: 15px;
+        background-color: #e6fffb;
+        color: #08979c;
+
+        &:hover {
+            background-color: #cefff7;
+        }
+    }
+}
+
+.appreciation-item {
+    margin: 0 10px 20px;
+    margin-left: 0;
+    padding: 4px 10px;
+    background-color: var(--white-color);
+    border: 2px solid #adc6ff;
+    border-style: dashed;
+    border-radius: var(--box-radius);
+}
