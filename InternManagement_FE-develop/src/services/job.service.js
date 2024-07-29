@@ -415,6 +415,10 @@ const submitApplyRequest = ({ applyId, apply_status }) => {
     return axios.post(URL, { apply_status }, { headers: environment.header });
 }
 
+const submitFinishRequest = ({ applyId, file_url }) => {
+    const URL = environment.host + `/business/apply/finish/${applyId}`;
+    return axios.patch(URL, { file_url }, { headers: environment.header });
+}
 
 // Trending jobs
 const getTrendingJobs = () => {
@@ -449,6 +453,7 @@ export const JobService = {
     getAppliedJob,
     getApplyList,
     submitApplyRequest,
+    submitFinishRequest,
 
     // Trending jobs
     getTrendingJobs,

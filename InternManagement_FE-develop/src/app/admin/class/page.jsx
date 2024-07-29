@@ -179,6 +179,7 @@ export default function Class() {
         .getAllClasses(schoolId)
         .then((res) => {
             let _classes = [];
+            console.log("class data:", res.data)
             res.data.data.forEach((item, index) => {
                 _classes.push(
                     new IClass(
@@ -186,7 +187,7 @@ export default function Class() {
                         item.id, 
                         item.class_name, 
                         item.students, 
-                        item.head_teacher, 
+                        item.teacher.user_person.full_name, 
                         item.department.department_name,
                         item.department_id
                     )

@@ -5,11 +5,11 @@ export const PASSED_STATUS = {
     },
     FAILED: {
         value: 'FAILED',
-        name: 'Thất bại'
+        name: 'Không đạt'
     },
     PASSED: {
         value: 'PASSED',
-        name: 'Thành công'
+        name: 'Đạt'
     },
 }
 
@@ -71,8 +71,8 @@ export const APPLY_STATUS = {
 }
 
 export const INTERN_STATUS = {
-    WAITTING: {
-        value: 'WAITTING',
+    WAITING: {
+        value: 'WAITING',
         name: 'Đang chờ'
     },
     IN_PROGRESS: {

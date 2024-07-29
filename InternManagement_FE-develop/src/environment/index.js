@@ -22,6 +22,7 @@ export const environment = {
     header: {
         "Content-Type": "application/json; charset=utf-8",
         "Authorization": LocalStorageService.getSyncToken()?.access_token,
-    }
+    },
+    authorization: LocalStorageService.getSyncToken()?.access_token,
 };
 

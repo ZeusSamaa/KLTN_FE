@@ -21,6 +21,7 @@ import { formattedDate } from "@/helpers/format";
 import { JobService } from "@/services/job.service";
 import { InternService } from "@/services/intern.service";
 import { NOTIFICATION_TYPE } from "@/constant/notification-type";
+import Link from "next/link";
 
 const cx = classNames.bind(styles);
 
@@ -28,7 +29,7 @@ const AppliedJobItem = ({ data, openNotificationWithIcon, reload }) => {
 
     const handleAcceptIntern = () => {
         InternService
-            .submitInternProgress({ id: data.id, is_interning: INTERN_STATUS.IN_PROGRESS })
+            .submitInternProgress({ id: data.id, is_interning: INTERN_STATUS.IN_PROGRESS.value })
             .then(() => {
                 openNotificationWithIcon(
                     NOTIFICATION_TYPE.SUCCESS,
@@ -163,8 +164,14 @@ export default function StudentLibrary() {
                                 <Spin size="small"/>
                             </div>
                         ) : (
-                            <Row>
-                               
+                                <Row>
+                                {
+                                    appliedJobs.filter((v) => v.file_url).map((job, index) => (
+                                        <Link href={job.file_url} key={index}>
+                                            {job.file_url.split('/').pop()}
+                                           </Link>
+                                    ))
+                                }
                             </Row>
                         )
                     }

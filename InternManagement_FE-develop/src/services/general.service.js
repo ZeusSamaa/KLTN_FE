@@ -1,5 +1,6 @@
 import axios from "axios";
 import { environment } from "../environment";
+import { PASSED_STATUS } from "@/constant/intern-status";
 
 const academic_years = [ 
     { value: 1, label: "2018" }, 
@@ -14,12 +15,6 @@ const semesters = [
     { value: 1, label: "Học kỳ 1" },
     { value: 2, label: "Học kỳ 2" },
 ];
-
-const statuses = [
-    { value: 1, label: "Đang thực tập" },
-    { value: 2, label: "Đã hoàn thành" },
-];
-
 
 // AUTHEN ACCOUNT 
 const getProfile = () => {
@@ -165,7 +160,7 @@ const deleteSemester = (schoolId, semesterId) => {
 
 // STATUS
 const getStatuses = () => {
-    return new Promise((resolve) => resolve(statuses));
+    return new Promise((resolve) => resolve(PASSED_STATUS));
 }
 
 

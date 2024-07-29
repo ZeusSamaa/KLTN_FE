@@ -64,35 +64,38 @@ export default function Student() {
 
     const [tableParams, setTableParams] = useState({
         pagination: {
-          current: 1,
-          pageSize: 10,
+            current: 1,
+            pageSize: 10,
         },
     });
 
-    const columns = useMemo (() => STUDENT_COLUMNS, []);
+    const columns = useMemo(() => STUDENT_COLUMNS, []);
+
 
     const getAllStudents = () => {
         StudentService
-        .getAllStudents()
-        .then((res) => {
-            const _students = [];
-            res.data.data.forEach((item, index) => {
-                _students.push(
-                    new IStudent(
-                        index + 1,
-                        item.id,
-                        item.full_name,
-                        formattedDate(item.student.admission_date),
-                        formattedDate(item.student.dob),
-                        upperCaseFirtLetter(item.student.sex),
-                        getStudyingStatus(item.student.current_status),
-                        item.student.class.class_name
+            .getAllStudents()
+            .then((res) => {
+                const _students = [];
+                const filteredData = filterCheck(res.data.data);
+                console.log("data student:", res.data);
+                filteredData.forEach((item, index) => {
+                    _students.push(
+                        new IStudent(
+                            index + 1,
+                            item.id,
+                            item.full_name,
+                            formattedDate(item.student.admission_date),
+                            formattedDate(item.student.dob),
+                            upperCaseFirtLetter(item.student.sex),
+                            getStudyingStatus(item.student.current_status),
+                            item.student.class.class_name
+                        )
                     )
-                )
+                })
+                setStudents(_students);
+                setIsLoading(false);
             })
-            setStudents(_students);
-            setIsLoading(false);
-        })
     }
 
     useEffect(() => {
@@ -101,72 +104,72 @@ export default function Student() {
 
     return (
         <div className={cx('wrapper')}>
-            <Header title={'Sinh viên'} icon={faUserGraduate}/>
-            
-                
-                <div className={cx('intern-container')}>
-                    <div className={cx('intern-main')}>
+            <Header title={'Sinh viên'} icon={faUserGraduate} />
+
+
+            <div className={cx('intern-container')}>
+                <div className={cx('intern-main')}>
                     {
                         showAddScreen ? (
-                            <CreateStudent schoolId={schoolId} setShow={setShowAddScreen}/>
+                            <CreateStudent schoolId={schoolId} setShow={setShowAddScreen} />
                         ) : (
                             <React.Fragment>
                                 <div className={cx('d-flex gap-3')}>
-                                    <button 
-                                        className={cx("view-btn")} 
-                                        style={{marginLeft: 0}}
+                                    <button
+                                        className={cx("view-btn")}
+                                        style={{ marginLeft: 0 }}
                                         onClick={() => setShowAddScreen(true)}
                                     >
-                                        <FontAwesomeIcon 
-                                            className={cx("btn-option__icon")} 
-                                            icon={faPlus} 
-                                            size="lg" 
-                                            style={{marginRight: 10}}
+                                        <FontAwesomeIcon
+                                            className={cx("btn-option__icon")}
+                                            icon={faPlus}
+                                            size="lg"
+                                            style={{ marginRight: 10 }}
                                         />
                                         Thêm mới
                                     </button>
-                                    <button 
-                                        className={cx("view-btn", "sucess")} 
-                                        onClick={() => {}}
-                                        style={{marginLeft: 0}}
+                                    <button
+                                        className={cx("view-btn", "sucess")}
+                                        onClick={() => { }}
+                                        style={{ marginLeft: 0 }}
                                     >
-                                        <FontAwesomeIcon 
-                                            className={cx("btn-option__icon", "sucess")} 
-                                            icon={faFileImport} 
-                                            size="lg" 
-                                            style={{marginRight: 10}}
+                                        <FontAwesomeIcon
+                                            className={cx("btn-option__icon", "sucess")}
+                                            icon={faFileImport}
+                                            size="lg"
+                                            style={{ marginRight: 10 }}
                                         />
                                         Tải lên
                                     </button>
-                                    <button 
-                                        className={cx("view-btn", "warn")} 
+                                    <button
+                                        className={cx("view-btn", "warn")}
                                         onClick={() => exportData(dataStore, EXPORT_TYPE.STUDENT)}
-                                        style={{marginLeft: 0}}
+                                        style={{ marginLeft: 0 }}
                                     >
-                                        <FontAwesomeIcon 
-                                            className={cx("btn-option__icon", "warn")} 
-                                            icon={faFilePdf} 
-                                            size="lg" 
-                                            style={{marginRight: 10}}
+                                        <FontAwesomeIcon
+                                            className={cx("btn-option__icon", "warn")}
+                                            icon={faFilePdf}
+                                            size="lg"
+                                            style={{ marginRight: 10 }}
                                         />
                                         Xuất File
                                     </button>
                                 </div>
                                 <div className={cx('table-data')}>
-                                    <Table 
+                                    <Table
                                         loading={isLoading}
                                         bordered
-                                        columns={columns} 
-                                        dataSource={students} 
+                                        columns={columns}
+                                        dataSource={students}
                                         pagination={tableParams?.pagination}
                                     />
                                 </div>
                             </React.Fragment>
                         )
                     }
-                    </div>
                 </div>
-            
+            </div>
+
             {/* <ButtonBack prevPath={'/admin'}/> */}
             {
                 selectedStudentIndex !== null && (

@@ -1,28 +1,28 @@
 'use client'
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { 
-    faBookOpenReader, 
-    faChalkboardTeacher, 
-    faHome, 
-    faLandmark, 
-    faPeopleRoof, 
-    faSchool, 
-    faTrash, 
-    faUserGraduate 
+import {
+    faBookOpenReader,
+    faChalkboardTeacher,
+    faHome,
+    faLandmark,
+    faPeopleRoof,
+    faSchool,
+    faTrash,
+    faUserGraduate
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { Image } from "next/image";
-import { 
-    LineChart, 
-    Line, 
-    XAxis, 
-    YAxis, 
-    CartesianGrid, 
-    Tooltip, 
-    Legend, 
+import {
+    LineChart,
+    Line,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    Legend,
     ResponsiveContainer,
 } from 'recharts';
 
@@ -104,46 +104,46 @@ const MANAGEMENT_ITEMS = [
 
 const data = [
     {
-      name: 'Page A',
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
+        name: 'Page A',
+        uv: 4000,
+        pv: 2400,
+        amt: 2400,
     },
     {
-      name: 'Page B',
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
+        name: 'Page B',
+        uv: 3000,
+        pv: 1398,
+        amt: 2210,
     },
     {
-      name: 'Page C',
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
+        name: 'Page C',
+        uv: 2000,
+        pv: 9800,
+        amt: 2290,
     },
     {
-      name: 'Page D',
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
+        name: 'Page D',
+        uv: 2780,
+        pv: 3908,
+        amt: 2000,
     },
     {
-      name: 'Page E',
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
+        name: 'Page E',
+        uv: 1890,
+        pv: 4800,
+        amt: 2181,
     },
     {
-      name: 'Page F',
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
+        name: 'Page F',
+        uv: 2390,
+        pv: 3800,
+        amt: 2500,
     },
     {
-      name: 'Page G',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
+        name: 'Page G',
+        uv: 3490,
+        pv: 4300,
+        amt: 2100,
     },
 ];
 
@@ -166,11 +166,11 @@ export default function AdminHome() {
     const [isAcademicPending, setIsAcademicPending] = useState(false);
     const [isSemesterPending, setIsSemesterPending] = useState(false);
     const [api, contextHolder] = notification.useNotification();
-    
+
     const openNotificationWithIcon = (type, message, description) => {
         return api[type]({
             message,
-          description,
+            description,
         });
     };
 
@@ -188,38 +188,38 @@ export default function AdminHome() {
         }
     }, [role])
 
-    const setItemData = () => MANAGEMENT_ITEMS.map((item) => 
+    const setItemData = () => MANAGEMENT_ITEMS.map((item) =>
         item.quantity = school[`${item.name}`]
     )
 
     const getAllAcademicYears = () => {
         GeneralService
-        .getAcademicYears(school.school_id)
-        .then((res) => {
-            setAcademicYears(res.data?.items);
-        })
-        .catch((error) => {
-            openNotificationWithIcon(
-                NOTIFICATION_TYPE.ERROR,
-                "Thất bại",
-                error
-            );
-        }); 
+            .getAcademicYears(school.school_id)
+            .then((res) => {
+                setAcademicYears(res.data?.items);
+            })
+            .catch((error) => {
+                openNotificationWithIcon(
+                    NOTIFICATION_TYPE.ERROR,
+                    "Thất bại",
+                    error
+                );
+            });
     }
 
     const getAllSemesters = () => {
         GeneralService
-        .getAllSemesters(school.school_id)
-        .then((res) => {
-            setSemesters(res.data);
-        })
-        .catch((error) => {
-            openNotificationWithIcon(
-                NOTIFICATION_TYPE.ERROR,
-                "Thất bại",
-                error
-            );
-        })
+            .getAllSemesters(school.school_id)
+            .then((res) => {
+                setSemesters(res.data);
+            })
+            .catch((error) => {
+                openNotificationWithIcon(
+                    NOTIFICATION_TYPE.ERROR,
+                    "Thất bại",
+                    error
+                );
+            })
     }
 
     useEffect(() => {
@@ -234,9 +234,9 @@ export default function AdminHome() {
     const handleMouseEnter = (o) => {
         const { dataKey } = o;
         const { opacity } = graphState;
-    
+
         setGraphState({
-          opacity: { ...opacity, [dataKey]: 0.5 },
+            opacity: { ...opacity, [dataKey]: 0.5 },
         });
     };
 
@@ -256,8 +256,8 @@ export default function AdminHome() {
     const handlePostNewAcademicYear = () => {
         if (academicName.trim().length === 0) {
             openNotificationWithIcon(
-                NOTIFICATION_TYPE.ERROR, 
-                "Thất bại", 
+                NOTIFICATION_TYPE.ERROR,
+                "Thất bại",
                 "Vui lòng nhập thông tin niên khóa đầy đủ"
             );
             return;
@@ -265,8 +265,8 @@ export default function AdminHome() {
 
         if (parseInt(academicName) > new Date().getUTCFullYear()) {
             openNotificationWithIcon(
-                NOTIFICATION_TYPE.ERROR, 
-                "Thất bại", 
+                NOTIFICATION_TYPE.ERROR,
+                "Thất bại",
                 "Niên khóa phải nhỏ hơn hoặc bằng năm hiện tại"
             );
             return;
@@ -284,34 +284,34 @@ export default function AdminHome() {
         setIsAcademicPending(true);
 
         GeneralService
-        .postAcademicYear(school.school_id, { 
-            current_year: parseInt(academicName)
-        })
-        .then(() => {
-            openNotificationWithIcon(
-                NOTIFICATION_TYPE.SUCCESS,
-                "Thành công",
-                "Thêm mới niên khóa thành công"
-            );
-            setAcademicName('');
-            getAllAcademicYears();
-            setIsAcademicPending(false);
-        })
-        .catch((error) => {
-            openNotificationWithIcon(
-                NOTIFICATION_TYPE.ERROR,
-                "Thất bại",
-                error
-            );
-            setIsAcademicPending(false);
-        })
+            .postAcademicYear(school.school_id, {
+                current_year: parseInt(academicName)
+            })
+            .then(() => {
+                openNotificationWithIcon(
+                    NOTIFICATION_TYPE.SUCCESS,
+                    "Thành công",
+                    "Thêm mới niên khóa thành công"
+                );
+                setAcademicName('');
+                getAllAcademicYears();
+                setIsAcademicPending(false);
+            })
+            .catch((error) => {
+                openNotificationWithIcon(
+                    NOTIFICATION_TYPE.ERROR,
+                    "Thất bại",
+                    error
+                );
+                setIsAcademicPending(false);
+            })
     }
 
     const handlePostNewSemester = () => {
         if (semesterName.trim().length === 0) {
             openNotificationWithIcon(
-                NOTIFICATION_TYPE.ERROR, 
-                "Thất bại", 
+                NOTIFICATION_TYPE.ERROR,
+                "Thất bại",
                 "Vui lòng nhập thông tin học kỳ đầy đủ"
             );
             return;
@@ -320,76 +320,76 @@ export default function AdminHome() {
         setIsSemesterPending(true);
 
         GeneralService
-        .postSemester(school.school_id, { semester_name: semesterName})
-        .then(() => {
-            openNotificationWithIcon(
-                NOTIFICATION_TYPE.SUCCESS,
-                "Thành công",
-                "Thêm mới học kỳ thành công"
-            );
-            setSemesterName('');
-            getAllSemesters();
-            setIsSemesterPending(false);
-        })
-        .catch((error) => {
-            openNotificationWithIcon(
-                NOTIFICATION_TYPE.ERROR,
-                "Thất bại",
-                error
-            );
-            setIsSemesterPending(false);
-        })
+            .postSemester(school.school_id, { semester_name: semesterName })
+            .then(() => {
+                openNotificationWithIcon(
+                    NOTIFICATION_TYPE.SUCCESS,
+                    "Thành công",
+                    "Thêm mới học kỳ thành công"
+                );
+                setSemesterName('');
+                getAllSemesters();
+                setIsSemesterPending(false);
+            })
+            .catch((error) => {
+                openNotificationWithIcon(
+                    NOTIFICATION_TYPE.ERROR,
+                    "Thất bại",
+                    error
+                );
+                setIsSemesterPending(false);
+            })
     }
 
     const handleDeleteAcademicYear = (academicYear) => {
         const yearId = academicYear?.id;
 
         GeneralService
-        .deleteAcademicYear(school.school_id, yearId)
-        .then(() => {
-            openNotificationWithIcon(
-                NOTIFICATION_TYPE.SUCCESS,
-                "Thành công",
-                "Xóa niên khóa thành công"
-            );
-            getAllAcademicYears();
-        })
-        .catch((error) => {
-            openNotificationWithIcon(
-                NOTIFICATION_TYPE.ERROR,
-                "Thất bại",
-                error
-            );
-        })
+            .deleteAcademicYear(school.school_id, yearId)
+            .then(() => {
+                openNotificationWithIcon(
+                    NOTIFICATION_TYPE.SUCCESS,
+                    "Thành công",
+                    "Xóa niên khóa thành công"
+                );
+                getAllAcademicYears();
+            })
+            .catch((error) => {
+                openNotificationWithIcon(
+                    NOTIFICATION_TYPE.ERROR,
+                    "Thất bại",
+                    error
+                );
+            })
     }
 
     const handleDeleteSemester = (semester) => {
         const semesterId = semester?.id;
 
         GeneralService
-        .deleteSemester(school.school_id, semesterId)
-        .then(() => {
-            openNotificationWithIcon(
-                NOTIFICATION_TYPE.SUCCESS,
-                "Thành công",
-                "Xóa học kỳ thành công"
-            );
-            getAllSemesters();
-        })
-        .catch((error) => {
-            openNotificationWithIcon(
-                NOTIFICATION_TYPE.ERROR,
-                "Thất bại",
-                error
-            );
-        })
+            .deleteSemester(school.school_id, semesterId)
+            .then(() => {
+                openNotificationWithIcon(
+                    NOTIFICATION_TYPE.SUCCESS,
+                    "Thành công",
+                    "Xóa học kỳ thành công"
+                );
+                getAllSemesters();
+            })
+            .catch((error) => {
+                openNotificationWithIcon(
+                    NOTIFICATION_TYPE.ERROR,
+                    "Thất bại",
+                    "Xóa học kỳ thất bại"
+                );
+            })
     }
 
     return (
         <>
-            { contextHolder }
+            {contextHolder}
             <div className={cx("wrapper")}>
-                <Header title={'Trang chủ'} icon={faHome}/>
+                <Header title={'Trang chủ'} icon={faHome} />
                 {
                     loadingPage ? (
                         <Loading />
@@ -401,44 +401,44 @@ export default function AdminHome() {
                                     <Row>
                                         {
                                             MANAGEMENT_ITEMS.map((item, index) => (
-                                                <Col 
+                                                <Col
                                                     xs={12}
                                                     sm={12}
                                                     md={6}
-                                                    lg={6} 
+                                                    lg={6}
                                                     xl={4}
                                                     key={index}
                                                 >
-                                                    <Link 
+                                                    <Link
                                                         className={cx(
-                                                            "category-item", 
-                                                            "d-flex", 
+                                                            "category-item",
+                                                            "d-flex",
                                                             "align-items-center",
                                                             "gap-2",
                                                             "mb-4",
-                                                            "text-decoration-none", 
-                                                        )} 
-                                                        href={{ 
-                                                            pathname: item?.path, 
-                                                            query: { 'schoolId': school?.school_id } 
+                                                            "text-decoration-none",
+                                                        )}
+                                                        href={{
+                                                            pathname: item?.path,
+                                                            query: { 'schoolId': school?.school_id }
                                                         }}
                                                         prefetch={false}
                                                     >
-                                                        <div 
+                                                        <div
                                                             className={cx(
                                                                 'd-flex justify-content-center align-items-center'
                                                             )}
-                                                            style={{ 
-                                                                width: 50, 
-                                                                height: 50, 
+                                                            style={{
+                                                                width: 50,
+                                                                height: 50,
                                                                 minWidth: 50,
                                                                 borderRadius: '50%',
                                                                 backgroundColor: item["icon-background-color"]
                                                             }}
                                                         >
-                                                            <FontAwesomeIcon 
-                                                                icon={item.icon} 
-                                                                style={{fontSize: 20, color: item.color}}
+                                                            <FontAwesomeIcon
+                                                                icon={item.icon}
+                                                                style={{ fontSize: 20, color: item.color }}
                                                             />
                                                         </div>
                                                         <div className={cx("ms-3")} style={{ flex: 1 }}>
@@ -457,7 +457,7 @@ export default function AdminHome() {
                                             ))
                                         }
                                     </Row>
-                                    <ResponsiveContainer className={cx('category-item', 'mb-4')} width="100%" height={300}>
+                                    {/* <ResponsiveContainer className={cx('category-item', 'mb-4')} width="100%" height={300}>
                                         <LineChart
                                             width="100%"
                                             height={500}
@@ -491,13 +491,13 @@ export default function AdminHome() {
                                                 stroke="#82ca9d" 
                                             />
                                         </LineChart>
-                                    </ResponsiveContainer>
+                                    </ResponsiveContainer> */}
                                 </div>
                                 <div className={cx("col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12")}>
                                     <div className={cx("category-item", "mb-4")}>
                                         <h5 className={cx('category-item__title')}>Thông tin niên khóa</h5>
                                         <div className={cx('d-flex gap-2 mt-3')}>
-                                            <Input 
+                                            <Input
                                                 type="number"
                                                 maxLength={50}
                                                 placeholder="Niên khóa"
@@ -506,12 +506,12 @@ export default function AdminHome() {
                                                 value={academicName}
                                                 onChange={(e) => setAcademicName(e.target.value)}
                                             />
-                                            <button 
+                                            <button
                                                 className={cx('view-btn')}
                                                 onClick={() => handlePostNewAcademicYear()}
                                             >
-                                                { isAcademicPending && 
-                                                    <Spin size="small" style={{ marginRight: 8 }}/> }
+                                                {isAcademicPending &&
+                                                    <Spin size="small" style={{ marginRight: 8 }} />}
                                                 Thêm mới
                                             </button>
                                         </div>
@@ -519,9 +519,9 @@ export default function AdminHome() {
                                             {
                                                 academicYears.length > 0 && academicYears.map((year, index) => (
                                                     <div key={index} className={cx('mt-1 d-flex align-items-center')}>
-                                                        <img 
-                                                            src={school?.school_avatar} 
-                                                            alt="school logo" 
+                                                        <img
+                                                            src={school?.school_avatar}
+                                                            alt="school logo"
                                                             style={{
                                                                 width: 50,
                                                                 height: 50,
@@ -536,13 +536,13 @@ export default function AdminHome() {
                                                             title="Xóa niên khóa"
                                                             description="Bạn chắc chắn xóa niên khóa này chứ?"
                                                             onConfirm={() => handleDeleteAcademicYear(year)}
-                                                            onCancel={() => {}}
+                                                            onCancel={() => { }}
                                                             okText="Đồng ý"
                                                             cancelText="Hủy bỏ"
                                                         >
-                                                            <FontAwesomeIcon 
+                                                            <FontAwesomeIcon
                                                                 style={{ marginLeft: 'auto', cursor: 'pointer' }}
-                                                                icon={faTrash} 
+                                                                icon={faTrash}
                                                                 color="var(--red-4-color)"
                                                             />
                                                         </Popconfirm>
@@ -554,7 +554,7 @@ export default function AdminHome() {
                                     <div className={cx("category-item")}>
                                         <h5 className={cx('category-item__title')}>Thông tin học kỳ</h5>
                                         <div className={cx('d-flex gap-2 mt-3')}>
-                                            <Input 
+                                            <Input
                                                 type="text"
                                                 maxLength={50}
                                                 placeholder="Học kỳ"
@@ -562,12 +562,12 @@ export default function AdminHome() {
                                                 value={semesterName}
                                                 onChange={(e) => setSemesterName(e.target.value)}
                                             />
-                                            <button 
+                                            <button
                                                 className={cx('view-btn')}
                                                 onClick={() => handlePostNewSemester()}
                                             >
-                                                { isSemesterPending && 
-                                                    <Spin size="small" style={{ marginRight: 8 }}/> }
+                                                {isSemesterPending &&
+                                                    <Spin size="small" style={{ marginRight: 8 }} />}
                                                 Thêm mới
                                             </button>
                                         </div>
@@ -575,9 +575,9 @@ export default function AdminHome() {
                                             {
                                                 semesters.length > 0 && semesters.map((semester, index) => (
                                                     <div key={index} className={cx('mt-1 d-flex align-items-center')}>
-                                                        <img 
-                                                            src={school?.school_avatar} 
-                                                            alt="school logo" 
+                                                        <img
+                                                            src={school?.school_avatar}
+                                                            alt="school logo"
                                                             style={{
                                                                 width: 50,
                                                                 height: 50,
@@ -592,13 +592,13 @@ export default function AdminHome() {
                                                             title="Xóa học kỳ"
                                                             description="Bạn chắc chắn xóa học kỳ này chứ?"
                                                             onConfirm={() => handleDeleteSemester(semester)}
-                                                            onCancel={() => {}}
+                                                            onCancel={() => { }}
                                                             okText="Đồng ý"
                                                             cancelText="Hủy bỏ"
                                                         >
-                                                            <FontAwesomeIcon 
+                                                            <FontAwesomeIcon
                                                                 style={{ marginLeft: 'auto', cursor: 'pointer' }}
-                                                                icon={faTrash} 
+                                                                icon={faTrash}
                                                                 color="var(--red-4-color)"
                                                             />
                                                         </Popconfirm>

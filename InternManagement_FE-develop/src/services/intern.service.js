@@ -201,8 +201,29 @@ const getOpeningSubjects = () => {
     return new Promise((resolve) => resolve(openingSubjects));
 }
 
-const getInterningList = () => {
-    return new Promise((resolve) => resolve(internList.filter((item) => item.status === 1)));
+const teacherGetInterningList = (data) => {
+    const URL = environment.host + `/teacher/student-learn-intern`;
+    return axios.get(URL, {
+        headers: environment.header, params: data});
+}
+
+const teacherGetLearnInternInternJobList = (data) => {
+    const URL = environment.host + `/teacher/student-learn-intern-intern-job`;
+    return axios.get(URL, {
+        headers: environment.header, params: data});
+}
+
+const adminGetInterningList = (data) => { 
+    const URL = environment.host + `/admin/school/${data?.id}/learn-intern-all`;
+    return axios.get(URL, {
+        headers: environment.header, params: {
+            is_report: data?.is_report
+        }});
+}
+
+const updateLearnInternScore = (data) => { 
+    const URL = environment.host + `/teacher/student-learn-intern/${data.learn_intern_id}`;
+    return axios.put(URL, {score:data.score}, { headers: environment.header });
 }
 
 const getInternedList = () => {
@@ -290,7 +311,8 @@ const submitInternProgress = ({ id, is_interning }) => {
 
 export const InternService = {
     getOpeningSubjects,
-    getInterningList,
+    getInterningList: teacherGetInterningList,
+    teacherGetLearnInternInternJobList,
     getInternedList,
 
 
@@ -314,5 +336,9 @@ export const InternService = {
     deleteCoverLetterRequest,
     submitCoverLetterRequest,
 
-    submitInternProgress
+    submitInternProgress,
+
+    updateLearnInternScore,
+
+    adminGetInterningList
 }
