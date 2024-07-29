@@ -26,7 +26,7 @@ const cx = classNames.bind(styles);
 
 const useSocket = (messageHandler) => {
     const [socket, setSocket] = useState(null);
-  
+
     useEffect(() => {
         const newSocket = io(SOCKET_SERVER_URL);
         setSocket(newSocket);
@@ -37,7 +37,7 @@ const useSocket = (messageHandler) => {
             newSocket.disconnect();
         };
     }, []);
-  
+
     return socket;
 };
 
@@ -58,13 +58,13 @@ export default function StudentContact() {
 
     const openNotificationWithIcon = (type, message, description) => {
         return api[type]({
-          message,
-          description,
+            message,
+            description,
         });
     };
-    
+
     const [message, setMessage] = useState('');
-    
+
     function getProfile() {
         GeneralService
             .getProfile()
@@ -87,7 +87,7 @@ export default function StudentContact() {
         getProfile();
         getConversations();
     }, [])
-    
+
     useEffect(() => {
         if (usersInMessage.length > 0) {
             setSelectedChannelID(usersInMessage[0].id);
@@ -117,8 +117,8 @@ export default function StudentContact() {
 
         return {
             full_name: userInChannel?.business.user_person.full_name || "",
-            avatar_path: userInChannel?.business.user_person.image || 
-                            "https://cdn-icons-png.flaticon.com/512/3607/3607444.png"
+            avatar_path: userInChannel?.business.user_person.image ||
+                "https://cdn-icons-png.flaticon.com/512/3607/3607444.png"
         }
     }
 
@@ -155,19 +155,19 @@ export default function StudentContact() {
 
     return (
         <div className={cx('wrapper')}>
-            { contextHolder }
-            <Header title={'Trao đổi'} icon={faMessage}/>
+            {contextHolder}
+            <Header title={'Trao đổi'} icon={faMessage} />
             <Row>
                 <Col xs={0} md={4} lg={3} xl={3}>
                     <div className={cx('contact-container')}>
                         <h4 className={cx('category-heading')}>{label.contact["contact-heading"]}</h4>
-                        
+
                         {
                             usersInMessage.length > 0 && (
                                 <div className={cx("search-container")}>
-                                    <input 
-                                        type="text" 
-                                        className={cx("search-input")} 
+                                    <input
+                                        type="text"
+                                        className={cx("search-input")}
                                         value={searchInput}
                                         onChange={(e) => setSearchInput(e.target.value)}
                                         placeholder="Tìm kiếm"
@@ -185,16 +185,16 @@ export default function StudentContact() {
                                     <React.Fragment>
                                         {
                                             usersInMessage.length > 0 ? usersInMessage.map((user, index) => (
-                                                <div 
-                                                    key={index} 
+                                                <div
+                                                    key={index}
                                                     className={cx("user-item", "user", {
                                                         active: user.id === selectedChannelID
                                                     })}
                                                     onClick={() => setSelectedChannelID(user.id)}
                                                 >
-                                                    <img 
-                                                        src={user.business.user_person.image || 'https://cdn-icons-png.flaticon.com/512/3607/3607444.png'} 
-                                                        alt="" 
+                                                    <img
+                                                        src={user.business.user_person.image || 'https://cdn-icons-png.flaticon.com/512/3607/3607444.png'}
+                                                        alt=""
                                                         className={cx("user-avatar")}
                                                     />
                                                     <div className={cx("general-info")}>
@@ -221,13 +221,13 @@ export default function StudentContact() {
                                         messages.length > 0 ? (
                                             <React.Fragment>
                                                 <div className={cx("user-item")}>
-                                                    <img src={personalInfo().avatar_path} alt="" className={cx("user-avatar")}/>
+                                                    <img src={personalInfo().avatar_path} alt="" className={cx("user-avatar")} />
                                                     <div className={cx("general-info")}>
                                                         <h5>{personalInfo().full_name}</h5>
                                                         <p className={cx("d-flex align-items-center")}>
-                                                            <FontAwesomeIcon 
-                                                                icon={faCircle} 
-                                                                size="xs" 
+                                                            <FontAwesomeIcon
+                                                                icon={faCircle}
+                                                                size="xs"
                                                                 color="var(--active-color)"
                                                                 style={{ marginRight: 4 }}
                                                             />
@@ -238,11 +238,11 @@ export default function StudentContact() {
                                                 <div className={cx("chat-content")}>
                                                     {
                                                         messages.map((message, index) => (
-                                                            <div 
+                                                            <div
                                                                 style={{ width: 'fit-content', maxWidth: 400 }}
                                                                 className={cx({
                                                                     "me": message.user_id === profile.userData?.id
-                                                                }, "mb-3")}    
+                                                                }, "mb-3")}
                                                             >
                                                                 <p className={cx("chat-item", {
                                                                     "me": message.user_id === profile.userData?.id
@@ -259,15 +259,15 @@ export default function StudentContact() {
                                                                     })}>{ formattedDate(message.createdAt) }</i>
                                                                 </div> */}
                                                             </div>
-                                                        )) 
+                                                        ))
                                                     }
                                                     <div ref={messageBody}></div>
                                                 </div>
                                                 <div className={cx("chat-options")}>
                                                     <div className={cx("search-container", "chat")}>
-                                                        <input 
-                                                            type="text" 
-                                                            className={cx("search-input", "chat")} 
+                                                        <input
+                                                            type="text"
+                                                            className={cx("search-input", "chat")}
                                                             value={message}
                                                             onChange={(e) => setMessage(e.target.value)}
                                                             onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
@@ -275,15 +275,15 @@ export default function StudentContact() {
                                                         />
                                                         <Tooltip title="Đính kèm file" color='var(--primary-active-color)'>
                                                             <div className={cx("search-icon__container", "chat", "attach-btn")}>
-                                                                <FontAwesomeIcon className={cx('search-icon')} icon={faPaperclip} size="xs"/>
+                                                                <FontAwesomeIcon className={cx('search-icon')} icon={faPaperclip} size="xs" />
                                                             </div>
                                                         </Tooltip>
                                                         <Tooltip title="Gửi tin nhắn" color='var(--purple-color)'>
-                                                            <div 
+                                                            <div
                                                                 className={cx("search-icon__container", "chat", "sent-btn")}
                                                                 onClick={sendMessage}
                                                             >
-                                                                <FontAwesomeIcon className={cx('search-icon')} icon={faPaperPlane} size="xs"/>
+                                                                <FontAwesomeIcon className={cx('search-icon')} icon={faPaperPlane} size="xs" />
                                                             </div>
                                                         </Tooltip>
                                                     </div>

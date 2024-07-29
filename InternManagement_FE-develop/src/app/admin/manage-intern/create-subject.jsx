@@ -58,6 +58,19 @@ export default function CreateSubject({ schoolId, currentSubject, setSubject, se
                 })
                 setTeachers(_teachers);
             })
+
+    }
+
+    const subjectCode = (id) => {
+        if (id === 1) {
+            return 'SE501'
+        }
+
+        else if (id === 30001) {
+            return 'CE501'
+        }
+        return null
+
     }
 
     useEffect(() => {
@@ -67,101 +80,100 @@ export default function CreateSubject({ schoolId, currentSubject, setSubject, se
             getAllTeachers();
         }
     }, [schoolId])
-
     return (
         <div className={cx("row")}>
             <div className={cx("col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-3")}>
-                <p className={cx("todo-label")}>Mã môn học</p>   
-                <Input value={currentSubject?.id || null} readOnly={true} disabled/>
+                <p className={cx("todo-label")}>Mã môn học</p>
+                <Input value={subjectCode(currentSubject?.id) || null} readOnly={true} disabled />
             </div>
             <div className={cx("col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-3")}>
-                <p className={cx("todo-label", "required")}>Tên môn học</p>   
-                <Input value={currentSubject?.name} readOnly/>
+                <p className={cx("todo-label", "required")}>Tên môn học</p>
+                <Input value={currentSubject?.name} readOnly />
             </div>
             <div className={cx("col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-3")}>
-                <p className={cx("todo-label", "required")}>Số tín chỉ</p>   
-                <Input 
-                    min={1} 
-                    type='number' 
+                <p className={cx("todo-label", "required")}>Số tín chỉ</p>
+                <Input
+                    min={1}
+                    type='number'
                     className={cx('remove-appearance')}
                     value={currentSubject?.unit}
-                    onChange={(e) => setSubject((prev) => ({ ...prev, unit: parseInt(e.target.value)}))}
+                    onChange={(e) => setSubject((prev) => ({ ...prev, unit: parseInt(e.target.value) }))}
                 />
             </div>
             <div className={cx("col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-3")}>
-                <p className={cx("todo-label", "required")}>Số buổi học</p>   
-                <Input 
-                    min={1} 
-                    type='number' 
+                <p className={cx("todo-label", "required")}>Số buổi học</p>
+                <Input
+                    min={1}
+                    type='number'
                     className={cx('remove-appearance')}
                     value={currentSubject?.sessions}
-                    onChange={(e) => setSubject((prev) => ({ ...prev, sessions: parseInt(e.target.value)}))}
+                    onChange={(e) => setSubject((prev) => ({ ...prev, sessions: parseInt(e.target.value) }))}
                 />
             </div>
             <div className={cx("col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-3")}>
-                <p className={cx("todo-label", "required")}>Số lượng sinh viên</p>   
-                <Input 
-                    min={1} 
-                    type='number' 
+                <p className={cx("todo-label", "required")}>Số lượng sinh viên</p>
+                <Input
+                    min={1}
+                    type='number'
                     className={cx('remove-appearance')}
                     value={currentSubject?.max_students}
-                    onChange={(e) => setSubject((prev) => ({ ...prev, max_students: parseInt(e.target.value)}))}
+                    onChange={(e) => setSubject((prev) => ({ ...prev, max_students: parseInt(e.target.value) }))}
                 />
             </div>
             <div className={cx("col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-3")}>
-                <p className={cx("todo-label", "required")}>Giảng viên hướng dẫn</p>   
-                <Select 
+                <p className={cx("todo-label", "required")}>Giảng viên hướng dẫn</p>
+                <Select
                     className={cx('w-100')}
                     options={teachers}
                     value={currentSubject?.teacher_id}
                     onChange={(value) => {
                         const departmentId = teachers.filter((item) => item.value === value)[0].departmentId;
-                        setSubject((prev) => ({ ...prev, teacher_id: value}));
+                        setSubject((prev) => ({ ...prev, teacher_id: value }));
                         setDepartment(departmentId);
                     }}
                 />
             </div>
             <div className={cx("col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-3")}>
-                <p className={cx("todo-label", "required")}>Năm học</p>   
-                <Select 
+                <p className={cx("todo-label", "required")}>Năm học</p>
+                <Select
                     className={cx('w-100')}
                     options={academicYears}
                     value={currentSubject?.academic_year}
-                    onChange={(value) => setSubject((prev) => ({ ...prev, academic_year: value}))}
+                    onChange={(value) => setSubject((prev) => ({ ...prev, academic_year: value }))}
                 />
             </div>
             <div className={cx("col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-3")}>
-                <p className={cx("todo-label", "required")}>Học kỳ</p>   
-                <Select 
+                <p className={cx("todo-label", "required")}>Học kỳ</p>
+                <Select
                     className={cx('w-100')}
                     options={semesters}
                     value={currentSubject?.semester_id}
-                    onChange={(value) => setSubject((prev) => ({ ...prev, semester_id: value}))}
+                    onChange={(value) => setSubject((prev) => ({ ...prev, semester_id: value }))}
                 />
             </div>
             <div className={cx("col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-3")}>
-                <p className={cx("todo-label", "required")}>Ngày bắt đầu</p>   
-                <DatePicker 
-                    className={cx('w-100')} 
-                    placeholder='Chọn ngày' 
+                <p className={cx("todo-label", "required")}>Ngày bắt đầu</p>
+                <DatePicker
+                    className={cx('w-100')}
+                    placeholder='Chọn ngày'
                     format={'DD-MM-YYYY'}
                     value={dayjs(currentSubject?.start_date)}
-                    onChange={(date) => setSubject((prev) => ({ ...prev, start_date: date}))}
+                    onChange={(date) => setSubject((prev) => ({ ...prev, start_date: date }))}
                 />
             </div>
             <div className={cx("col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-3")}>
-                <p className={cx("todo-label", "required")}>Ngày kết thúc</p>   
-                <DatePicker 
-                    className={cx('w-100')} 
-                    placeholder='Chọn ngày' 
+                <p className={cx("todo-label", "required")}>Ngày kết thúc</p>
+                <DatePicker
+                    className={cx('w-100')}
+                    placeholder='Chọn ngày'
                     format={'DD-MM-YYYY'}
                     value={dayjs(currentSubject?.end_date)}
-                    onChange={(date) => setSubject((prev) => ({ ...prev, end_date: date}))}
+                    onChange={(date) => setSubject((prev) => ({ ...prev, end_date: date }))}
                 />
             </div>
             <div className={cx("col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-3")}>
-                <p className={cx("todo-label", "required")}>Trạng thái môn học</p>   
-                <Select className={cx('w-100')}/>
+                <p className={cx("todo-label", "required")}>Trạng thái môn học</p>
+                <Select className={cx('w-100')} />
             </div>
         </div>
     )

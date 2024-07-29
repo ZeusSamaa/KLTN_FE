@@ -22,6 +22,7 @@ export const label = {
         "semester": "Học kỳ",
         "status": "Trạng thái",
         "intern-subject": "Môn học thực tập",
+        "subject-result": "Kết quả môn học",
         "examination-board": "Hội đồng chấm thực tập",
     },
     "jobs": {

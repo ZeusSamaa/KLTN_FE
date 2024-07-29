@@ -21,6 +21,7 @@ import { InternService } from '@/services/intern.service';
 import { GeneralService } from '@/services/general.service';
 import CustomModal from '@/components/Modal';
 import { INTERN_STATUS, PASSED_STATUS } from '@/constant/intern-status';
+import generateStudentId from '@/constant/generate/generateStudentCode'
 
 const cx = classNames.bind(styles);
 
@@ -161,7 +162,7 @@ function InternedStudents() {
                     <td
                       className={cx('field-item', INTERNING_HEADERS[1]?.size)}
                     >
-                      {student.student_id}
+                      {generateStudentId(student.student.admission_date, student.student_id)}
                     </td>
                     <td
                       className={cx('field-item', INTERNING_HEADERS[2]?.size)}
@@ -255,7 +256,8 @@ const StudentScoreRow = ({ student, onSave }) => {
           />
         </td>
         <td className={cx('field-item', INTERNING_HEADERS[1]?.size)}>
-          {student.student_id}
+          {generateStudentId(student.student.admission_date, student.student_id)}
+
         </td>
         <td className={cx('field-item', INTERNING_HEADERS[2]?.size)}>
           {student.student.user_person.full_name}

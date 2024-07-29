@@ -51,7 +51,7 @@ function RequestItem({ student, reload }) {
         openNotificationWithIcon(
           NOTIFICATION_TYPE.SUCCESS,
           'Thành công',
-          status === APPLY_STATUS.ONBOARD
+          status === APPLY_STATUS.APPROVED
             ? 'Xác nhận yêu cầu thành công'
             : 'Hủy yêu cầu thành công'
         );
@@ -343,27 +343,28 @@ function InterningItem({ student, reload }) {
             </span>
           )
           }
-          {student.status === APPLY_STATUS.ONBOARD.name && (
-            <Link
-              href={{
-                pathname: '/business/todo',
-                query: { studentId: student.student_id },
-              }}
-              className={cx('sub-content', 'mt-2')}
-              style={{
-                fontWeight: 400,
-                textDecoration: 'none',
-                fontSize: '15px !important',
-              }}
-            >
-              <FontAwesomeIcon
-                icon={faAirbnb}
-                size="sm"
-                style={{ marginRight: 8 }}
-              />
-              Theo dõi
-            </Link>
-          )}
+          {(student.status === APPLY_STATUS.ONBOARD.name || student.status === APPLY_STATUS.FINISHED.name)
+            && (
+              <Link
+                href={{
+                  pathname: '/business/todo',
+                  query: { studentId: student.student_id },
+                }}
+                className={cx('sub-content', 'mt-2')}
+                style={{
+                  fontWeight: 400,
+                  textDecoration: 'none',
+                  fontSize: '15px !important',
+                }}
+              >
+                <FontAwesomeIcon
+                  icon={faAirbnb}
+                  size="sm"
+                  style={{ marginRight: 8 }}
+                />
+                Theo dõi
+              </Link>
+            )}
         </div>
       )}
       <Modal

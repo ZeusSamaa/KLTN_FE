@@ -13,6 +13,8 @@ import { Button, Input, Modal, Pagination, Select } from "antd";
 import { InternService } from "@/services/intern.service";
 import { Col, Container, Row } from "react-bootstrap";
 import { INTERN_STATUS, PASSED_STATUS } from "@/constant/intern-status";
+import generateStudentId from '@/constant/generate/generateStudentCode'
+
 const cx = classNames.bind(styles);
 
 const maxItemsInPage = 10;
@@ -23,7 +25,7 @@ const headers = [
     { title: "Họ và tên", size: "large" },
     { title: "Lớp", size: "medium" },
     { title: "Trạng thái", size: "medium" },
-    { title: "Lựa chọn", size: "large" },
+    { title: "Lựa chọn", size: "medium" },
 ];
 
 function StudentView({ student }) {
@@ -151,7 +153,7 @@ export default function TeacherHome() {
         <div className={cx('wrapper')}>
             <Header title={'Trang chủ'} icon={faHome} />
             <div className={cx('intern-container')}>
-                <h4 className={cx('category-heading')}>{label.intern["intern-list"]}</h4>
+                <h4 className={cx('category-heading')}>{label.intern["subject-result"]}</h4>
                 {
                     loaded && (
                         <React.Fragment>
@@ -208,7 +210,7 @@ export default function TeacherHome() {
                                                         alt=""
                                                     />
                                                 </td>
-                                                <td className={cx("field-item", headers[1]?.size)}>{student.student_id}</td>
+                                                <td className={cx("field-item", headers[1]?.size)}>{generateStudentId(student.student.admission_date, student.student_id)}</td>
                                                 <td className={cx("field-item", headers[2]?.size)}>{student.student.user_person.full_name}</td>
                                                 <td className={cx("field-item", headers[3]?.size)}>{student.student.class.class_name}</td>
                                                 <td className={cx("field-item", headers[4]?.size)}>

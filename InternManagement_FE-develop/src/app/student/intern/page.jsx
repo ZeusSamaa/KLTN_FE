@@ -22,7 +22,7 @@ import { Button, Modal, Popconfirm, Spin, Tooltip, notification } from 'antd';
 import { InternService } from '@/services/intern.service';
 import { faUnity } from '@fortawesome/free-brands-svg-icons';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
-import {StudentUploadService} from '@/services/student-upload.service';
+import { StudentUploadService } from '@/services/student-upload.service';
 import ViewJob from '@/components/ViewJob';
 import { NOTIFICATION_TYPE } from '@/constant/notification-type';
 import {
@@ -33,7 +33,7 @@ import {
   PASSED_STATUS,
 } from '@/constant/intern-status';
 import { formattedDate } from '@/helpers/format';
-import {StudentService} from '@/services/student.service';
+import { StudentService } from '@/services/student.service';
 import { JobService } from '@/services/job.service';
 import { GeneralService } from '@/services/general.service';
 
@@ -147,15 +147,15 @@ function SubjectContainer({
 function ReportContainer() {
   const [businessFile, setBusinessFile] = useState(null);
   const [reportFile, setReportFile] = useState(null);
-    const [isPending, setIsPending] = useState(false);
-    const [api, contextHolder] = notification.useNotification();
-    
-    const openNotificationWithIcon = (type, message, description) => {
-        return api[type]({
-            message,
-          description,
-        });
-    };
+  const [isPending, setIsPending] = useState(false);
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotificationWithIcon = (type, message, description) => {
+    return api[type]({
+      message,
+      description,
+    });
+  };
 
 
 
@@ -180,7 +180,7 @@ function ReportContainer() {
         'Cập nhật thành công'
       );
     } catch (error) {
-        console.log(error);
+      console.log(error);
       openNotificationWithIcon(
         NOTIFICATION_TYPE.ERROR,
         'Thất bại',
@@ -200,17 +200,17 @@ function ReportContainer() {
 
   const uploadReport = () => {
     handleUploadProgress(async (url) => {
-      await StudentService.submitReport( url);
+      await StudentService.submitReport(url);
       setReportFile(null);
     }, reportFile);
   };
 
   return (
-      <React.Fragment>
-      { contextHolder }
+    <React.Fragment>
+      {contextHolder}
       <h5 className={cx('heading')}>Thông tin báo cáo</h5>
       <Row style={{ marginTop: 30, marginLeft: 6, marginRight: 6 }}>
-        <Col xs={12} md={12} lg={12} xl={12}>
+        {/* <Col xs={12} md={12} lg={12} xl={12}>
           <div className={cx('upload-container')}>
             <FontAwesomeIcon icon={faCloudArrowUp} className={cx('i-upload')} />
             <span className={cx('upload-title')}>
@@ -295,11 +295,11 @@ function ReportContainer() {
               )}
             </div>
           </div>
-        </Col>
+        </Col> */}
         <Col xs={12} md={12} lg={12} xl={12}>
           <div className={cx('upload-container')}>
             <FontAwesomeIcon icon={faCloudArrowUp} className={cx('i-upload')} />
-            <span className={cx('upload-title')}>File báo cáo đồ án</span>
+            <span className={cx('upload-title')}>File báo cáo thực tập</span>
             <input
               type="file"
               id="report-file"
@@ -540,12 +540,12 @@ export default function StudentIntern() {
         'is-pending': currentStatus === INTERN_STATUS['REPORT'],
         icon: faFlag,
       },
-      {
-        name: 'Kết quả thực tập',
-        'is-submitted': currentStatus > INTERN_STATUS['COMPLETED'],
-        'is-pending': currentStatus === INTERN_STATUS['COMPLETED'],
-        icon: faSquarePollVertical,
-      },
+      // {
+      //   name: 'Kết quả thực tập',
+      //   'is-submitted': currentStatus > INTERN_STATUS['COMPLETED'],
+      //   'is-pending': currentStatus === INTERN_STATUS['COMPLETED'],
+      //   icon: faSquarePollVertical,
+      // },
     ];
     setSteps(STEPS);
   }
@@ -763,7 +763,7 @@ export default function StudentIntern() {
         onCancel={() => setSelectedJob({})}
         width={800}
         footer={[
-          <Button type="primary" size="medium" onClick={() => {}}>
+          <Button type="primary" size="medium" onClick={() => { }}>
             Gửi yêu cầu
           </Button>,
           <Button size="medium" onClick={() => setSelectedJob({})}>
@@ -789,22 +789,22 @@ export default function StudentIntern() {
         }}
         footer={[
           Object.keys(selectedSubject).length > 0 &&
-            selectedSubject.regist_status !== REGIST_STATUS.SUCCESSED.value &&
-            selectedSubject.regist_status !== REGIST_STATUS.REJECTED.value && (
-              <Popconfirm
-                title="Hủy yêu cầu đăng ký"
-                description="Bạn chắc chắn muốn hủy yêu cầu đăng ký môn học?"
-                onConfirm={handleCancelRegistRequest}
-                onCancel={() => {
-                  setViewSubjectHistory(false);
-                  setSelectedSubject({});
-                }}
-                okText="Đồng ý"
-                cancelText="Đóng"
-              >
-                <button className={cx('view-btn', 'error')}>Hủy bỏ</button>,
-              </Popconfirm>
-            ),
+          selectedSubject.regist_status !== REGIST_STATUS.SUCCESSED.value &&
+          selectedSubject.regist_status !== REGIST_STATUS.REJECTED.value && (
+            <Popconfirm
+              title="Hủy yêu cầu đăng ký"
+              description="Bạn chắc chắn muốn hủy yêu cầu đăng ký môn học?"
+              onConfirm={handleCancelRegistRequest}
+              onCancel={() => {
+                setViewSubjectHistory(false);
+                setSelectedSubject({});
+              }}
+              okText="Đồng ý"
+              cancelText="Đóng"
+            >
+              <button className={cx('view-btn', 'error')}>Hủy bỏ</button>,
+            </Popconfirm>
+          ),
           <button
             className={cx('view-btn', 'cancel')}
             onClick={() => {
@@ -836,22 +836,22 @@ export default function StudentIntern() {
             <React.Fragment>
               {coverLetterRequest?.regist_submit_status ===
                 COVER_LETTER_STATUS.WAITTING.value && (
-                <Popconfirm
-                  title="Hủy yêu cầu"
-                  description="Bạn chắc chắn muốn hủy yêu cầu nhận giấy giới thiệu?"
-                  onConfirm={handleCancelCoverLetterRequest}
-                  onCancel={() => {
-                    setViewCoverLetter(false);
-                  }}
-                  okText="Đồng ý"
-                  cancelText="Đóng"
-                >
-                  <button className={cx('view-btn', 'error')}>
-                    Hủy yêu cầu
-                  </button>
-                  ,
-                </Popconfirm>
-              )}
+                  <Popconfirm
+                    title="Hủy yêu cầu"
+                    description="Bạn chắc chắn muốn hủy yêu cầu nhận giấy giới thiệu?"
+                    onConfirm={handleCancelCoverLetterRequest}
+                    onCancel={() => {
+                      setViewCoverLetter(false);
+                    }}
+                    okText="Đồng ý"
+                    cancelText="Đóng"
+                  >
+                    <button className={cx('view-btn', 'error')}>
+                      Hủy yêu cầu
+                    </button>
+                    ,
+                  </Popconfirm>
+                )}
               {!coverLetterRequest && (
                 <button
                   className={cx('view-btn')}
@@ -874,7 +874,7 @@ export default function StudentIntern() {
         <React.Fragment>
           {coverLetterRequest &&
             coverLetterRequest.regist_submit_status ===
-              COVER_LETTER_STATUS.SENT.value && (
+            COVER_LETTER_STATUS.SENT.value && (
               <React.Fragment>
                 <div className={cx('d-flex flex-column mt-4 mb-5')}>
                   <label
@@ -921,7 +921,7 @@ export default function StudentIntern() {
         }}
         width={800}
         footer={[
-          <Button type="primary" size="medium" danger onClick={() => {}}>
+          <Button type="primary" size="medium" danger onClick={() => { }}>
             Hủy yêu cầu
           </Button>,
           <Button

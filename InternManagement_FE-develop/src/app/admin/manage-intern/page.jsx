@@ -33,6 +33,9 @@ import { label } from '@/constant/label';
 import { NOTIFICATION_TYPE } from '@/constant/notification-type';
 import { formattedDate } from '@/helpers/format';
 import generateSubjectCode from '@/constant/generate/generateSubjecCode'
+import generateStudentId from '@/constant/generate/generateStudentCode'
+
+
 
 import Header from '@/components/Header';
 import CustomModal from '@/components/Modal';
@@ -99,18 +102,18 @@ const RequestTabView = ({
 
   const getSubjectRequests = () => {
     const _requests = [];
+
+    console.log("subjectRequestList: ", subjectRequestList.items);
     subjectRequestList?.items.forEach((item, index) => {
-      if (!checkStudent(item)) {
-        // Skip nếu student không hợp lệ
-        return;
-      }
+      const studentCode = generateStudentId(item.student.admission_date, item.student_id)
       _requests.push({
         idx: index + 1,
-        id: item.student_id,
+        id: studentCode,
         full_name: item.student.user_person.full_name,
         regist_status: getRegistStatus(item.regist_status),
         department: item.internSubject.department.department_name,
       });
+
     });
     setSubjectRequests(_requests);
   };
@@ -166,41 +169,41 @@ const RequestTabView = ({
       });
   };
 
-  const handleSubmitCoverLetterRequest = () => {
-    if (!coverLetterFile) {
-      openNotificationWithIcon(
-        NOTIFICATION_TYPE.ERROR,
-        'Thất bại',
-        'Vui lòng đính kèm file trước khi xác nhận'
-      );
-      return;
-    }
+  // const handleSubmitCoverLetterRequest = () => {
+  //   if (!coverLetterFile) {
+  //     openNotificationWithIcon(
+  //       NOTIFICATION_TYPE.ERROR,
+  //       'Thất bại',
+  //       'Vui lòng đính kèm file trước khi xác nhận'
+  //     );
+  //     return;
+  //   }
 
-    setIsPendingRequest(true);
+  //   setIsPendingRequest(true);
 
-    GoogleService.uploadFile(coverLetterFile, UPLOAD_FILE_TYPE.DOCS).then(
-      (coverLink) => {
-        InternService.submitCoverLetterRequest({
-          requestId: selectedCoverLetterRequestId,
-          file: coverLink,
-        })
-          .then(() => {
-            openNotificationWithIcon(
-              NOTIFICATION_TYPE.SUCCESS,
-              'Thành công',
-              'Xác nhận đăng ký thực tập thành công'
-            );
-            setIsPendingRequest(false);
-            setShowCoverLetterModal(false);
-            setSelectedCoverLetterRequestId(null);
-            reload();
-          })
-          .catch((err) => {
-            openNotificationWithIcon(NOTIFICATION_TYPE.ERROR, 'Thất bại', err);
-          });
-      }
-    );
-  };
+  //   GoogleService.uploadFile(coverLetterFile, UPLOAD_FILE_TYPE.DOCS).then(
+  //     (coverLink) => {
+  //       InternService.submitCoverLetterRequest({
+  //         requestId: selectedCoverLetterRequestId,
+  //         file: coverLink,
+  //       })
+  //         .then(() => {
+  //           openNotificationWithIcon(
+  //             NOTIFICATION_TYPE.SUCCESS,
+  //             'Thành công',
+  //             'Xác nhận đăng ký thực tập thành công'
+  //           );
+  //           setIsPendingRequest(false);
+  //           setShowCoverLetterModal(false);
+  //           setSelectedCoverLetterRequestId(null);
+  //           reload();
+  //         })
+  //         .catch((err) => {
+  //           openNotificationWithIcon(NOTIFICATION_TYPE.ERROR, 'Thất bại', err);
+  //         });
+  //     }
+  //   );
+  // };
 
   return (
     <React.Fragment>
@@ -323,7 +326,7 @@ const RequestTabView = ({
         )}
       </div>
 
-      <div className={cx('mt-5')}>
+      {/* <div className={cx('mt-5')}>
         <h4 className={cx('category-heading', 'mb-4')}>
           {label.intern['regist-intern-request']}
         </h4>
@@ -445,7 +448,7 @@ const RequestTabView = ({
             )}
           </React.Fragment>
         )}
-      </div>
+      </div> */}
       <Modal
         title="Thông tin thư giới thiệu"
         centered
@@ -526,7 +529,9 @@ const InternReportTabView = () => {
                   {index + 1}
                 </td>
                 <td className={cx('field-item', headers[1]?.size)}>
-                  {student.student_id}
+                  {/* {student.student_id} */}
+                  {generateStudentId(student.student.admission_date, student.student_id)}
+
                 </td>
                 <td className={cx('field-item', headers[2]?.size)}>
                   {student.student.user_person.full_name}
@@ -621,7 +626,8 @@ const InternListTabView = () => {
                   {index + 1}
                 </td>
                 <td className={cx('field-item', headers[1]?.size)}>
-                  {student.student_id}
+                  {/* {student.student_id} */}
+                  {generateStudentId(student.student.admission_date, student.student_id)}
                 </td>
                 <td className={cx('field-item', headers[2]?.size)}>
                   {student.student.user_person.full_name}
@@ -1056,12 +1062,12 @@ export default function AdminIntern() {
     getSchool();
   }, []);
 
-  const checkStudent = (item) => {
-    if (!item?.student) {
-      return false;
-    }
-    return true;
-  };
+  // const checkStudent = (item) => {
+  //   if (!item?.student) {
+  //     return false;
+  //   }
+  //   return true;
+  // };
 
   const getRegistSubjectRequestList = (schoolId) => {
     InternService.getRegistSubjectRequestList(schoolId).then((res) => {
