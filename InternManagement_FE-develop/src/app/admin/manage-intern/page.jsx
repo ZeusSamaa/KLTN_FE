@@ -102,7 +102,7 @@ const RequestTabView = ({
     subjectRequestList?.items.forEach((item, index) => {
       if (!checkStudent(item)) {
         // Skip nếu student không hợp lệ
-        return false;
+        return;
       }
       _requests.push({
         idx: index + 1,
@@ -120,7 +120,7 @@ const RequestTabView = ({
     internRequestList?.items.forEach((item, index) => {
       if (!checkStudent(item)) {
         // Skip nếu student không hợp lệ
-        return false;
+        return;
       }
       _requests.push({
         idx: index + 1,
@@ -1055,6 +1055,13 @@ export default function AdminIntern() {
   useEffect(() => {
     getSchool();
   }, []);
+
+  const checkStudent = (item) => {
+    if (!item?.student) {
+      return false;
+    }
+    return true;
+  };
 
   const getRegistSubjectRequestList = (schoolId) => {
     InternService.getRegistSubjectRequestList(schoolId).then((res) => {

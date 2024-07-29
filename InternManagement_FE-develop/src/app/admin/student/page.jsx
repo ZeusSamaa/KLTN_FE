@@ -71,15 +71,13 @@ export default function Student() {
 
     const columns = useMemo(() => STUDENT_COLUMNS, []);
 
-
     const getAllStudents = () => {
         StudentService
             .getAllStudents()
             .then((res) => {
                 const _students = [];
-                const filteredData = filterCheck(res.data.data);
-                console.log("data student:", res.data);
-                filteredData.forEach((item, index) => {
+                console.log(("data student: ", res.data));
+                res.data.data.forEach((item, index) => {
                     _students.push(
                         new IStudent(
                             index + 1,
